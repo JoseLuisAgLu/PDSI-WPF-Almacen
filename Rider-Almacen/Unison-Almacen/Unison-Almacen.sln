@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unison-Almacen-App", "Unison-Almacen-App\Unison-Almacen-App.csproj", "{477EED60-EEDF-48E4-A338-39CE073E6738}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unison-Almacen-Test", "Unison-Almacen-Test\Unison-Almacen-Test.csproj", "{C268CEFB-E3C6-4A22-8ED3-EA22CAD0D50B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unison-Almacen-Core", "Unison-Almacen-Core\Unison-Almacen-Core.csproj", "{AEAE62A7-CBB3-496B-B8E5-DE565849D886}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{477EED60-EEDF-48E4-A338-39CE073E6738}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{477EED60-EEDF-48E4-A338-39CE073E6738}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{477EED60-EEDF-48E4-A338-39CE073E6738}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{477EED60-EEDF-48E4-A338-39CE073E6738}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C268CEFB-E3C6-4A22-8ED3-EA22CAD0D50B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C268CEFB-E3C6-4A22-8ED3-EA22CAD0D50B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C268CEFB-E3C6-4A22-8ED3-EA22CAD0D50B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C268CEFB-E3C6-4A22-8ED3-EA22CAD0D50B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEAE62A7-CBB3-496B-B8E5-DE565849D886}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEAE62A7-CBB3-496B-B8E5-DE565849D886}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEAE62A7-CBB3-496B-B8E5-DE565849D886}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEAE62A7-CBB3-496B-B8E5-DE565849D886}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
