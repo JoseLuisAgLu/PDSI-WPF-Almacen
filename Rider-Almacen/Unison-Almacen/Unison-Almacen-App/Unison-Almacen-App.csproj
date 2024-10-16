@@ -9,4 +9,8 @@
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="EntityFrameworkCore.Sqlite.NodaTime" Version="8.0.1" />
+    </ItemGroup>
+
 </Project>

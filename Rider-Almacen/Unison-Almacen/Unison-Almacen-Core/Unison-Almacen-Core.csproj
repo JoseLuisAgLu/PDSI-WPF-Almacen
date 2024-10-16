@@ -7,4 +7,14 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Contratos\" />
+      <Folder Include="Repositorios\" />
+      <Folder Include="Servicios\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="EntityFrameworkCore.Sqlite.NodaTime" Version="8.0.1" />
+    </ItemGroup>
+
 </Project>
