@@ -10,13 +10,20 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
-      <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
       <PackageReference Include="WPF-UI" Version="3.0.5" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Unison-Almacen-Core\Unison-Almacen-Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\Logo_Unison.png" />
+      <Resource Include="Resources\Logo_Unison.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
 </Project>

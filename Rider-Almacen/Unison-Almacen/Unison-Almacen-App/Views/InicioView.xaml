@@ -4,9 +4,38 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Unison_Almacen_App.Views"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d"
-      Title="InicioView" Height="600" Width="800">
+      Title="InicioView" Height="511" Width="800">
     <Grid>
-        <TextBlock Text="Inicio View" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Image Grid.Row="0" 
+               Height="130" 
+               Source="../Resources/Logo_Unison.png" 
+               Margin="0 80 0 20"/>
+        
+        <TextBlock Grid.Row="1" 
+                   Text="ALMACEN UNISON"
+                   FontSize="25"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"/>
+        
+        <TextBlock Grid.Row="2" 
+                   Text="Aplicación para el manejo de productos"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+        
+        <TextBlock Grid.Row="3" 
+                   Text="Aguilera Luzania José Luis"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"/>
     </Grid>
 </Page>

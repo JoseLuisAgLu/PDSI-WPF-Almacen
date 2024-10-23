@@ -1,52 +1,78 @@
 ﻿using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Unison_Almacen_App.Servicios;
+using Unison_Almacen_App.ViewModel;
+using Unison_Almacen_App.Views;
 using Unison_Almacen_Core.BaseDeDatos;
 using Unison_Almacen_Core.Contratos.Repositorios;
 using Unison_Almacen_Core.Contratos.Servicios;
 using Unison_Almacen_Core.Modelos;
 using Unison_Almacen_Core.Repositorios;
 using Unison_Almacen_Core.Servicios;
+using Wpf.Ui;
 
 namespace Unison_Almacen_App;
 
 /// <summary>
 ///     Interaction logic for App.xaml
 /// </summary>
-public partial class App : Application
+public sealed partial class App : Application
 {
-    public IHost Host { get; }
-
-    public static T GetService<T>() where T : class
-    {
-        if ((App.Current as App)?.Host.Services.GetService(typeof(T)) is not T service)
-        {
-            throw new ArgumentException($"El servicio {typeof(T).Name} encontrado. Debe ser configurado en ConfigureServices dentro del App.xaml.cs.");
-        }
-        
-        return service;
-    }
-    
     public App()
     {
         InitializeComponent();
         
+        // Inicializar los servicios.
+        Services = ConfigServices();
+        
         // Asegurar que la base de datos existe.
         using var bd = new ProductoBD();
         bd.Database.EnsureCreated();
-        
-        // Inicialización del host.
-        Host = Microsoft.Extensions.Hosting.Host
-            .CreateDefaultBuilder()
-            .UseContentRoot(AppContext.BaseDirectory)
-            .ConfigureServices((context, services) =>
-            {
-                // Servicios.
-                services.AddTransient<ProductoBD>();
-                services.AddTransient<IServicio<Producto>, ProductoServicio>();
-                services.AddTransient<IRepositorio<Producto>, ProductoRepositorio>();
+    }
+    
+    /// <summary>
+    /// Obtiene la referencia de la aplicación actual.
+    /// </summary>
+    public new static App Current => (App)Application.Current;
 
-            })
-            .Build();
+    /// <summary>
+    /// Obtiene el proveedor para resolver los servicios de la aplicación.
+    /// </summary>
+    public IServiceProvider Services { get; }
+    
+    /// <summary>
+    /// Configura los servicios de la aplicación.
+    /// </summary>
+    /// <returns></returns>
+    private static IServiceProvider ConfigServices()
+    {
+        var services = new ServiceCollection();
+        
+        // Servicios.
+        services.AddTransient<ProductoBD>();
+        services.AddTransient<IServicio<Producto>, ProductoServicio>();
+        services.AddTransient<IRepositorio<Producto>, ProductoRepositorio>();
+        services.AddSingleton<IPageService, PageService>();
+
+        // MainWindow.
+        services.AddSingleton<MainWindow>();
+                
+        // Views
+        services.AddTransient<InicioView>();
+        services.AddTransient<ProductoView>();
+        
+        // ViewModels.
+        services.AddTransient<MainWindowViewModel>();
+        services.AddTransient<InicioViewModel>();
+        
+        return services.BuildServiceProvider();
+    }
+
+    protected override void OnStartup(StartupEventArgs e)
+    {
+        base.OnStartup(e);
+        
+        var mainWindow = Services.GetRequiredService<MainWindow>();
+        mainWindow.Show();
     }
 }
