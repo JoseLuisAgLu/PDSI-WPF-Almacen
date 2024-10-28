@@ -64,6 +64,7 @@ public sealed partial class App : Application
         // ViewModels.
         services.AddTransient<MainWindowViewModel>();
         services.AddTransient<InicioViewModel>();
+        services.AddTransient<ProductoViewModel>();
         
         return services.BuildServiceProvider();
     }

@@ -3,12 +3,37 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       xmlns:local="clr-namespace:Unison_Almacen_App.Views"
+      xmlns:viewModel="clr-namespace:Unison_Almacen_App.ViewModel"
+      d:DataContext="{d:DesignInstance viewModel:ProductoViewModel}"
       mc:Ignorable="d"
       Title="ProductoView" Height="511" Width="800">
     <Grid>
-        <TextBlock Text="Producto View" 
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center"/>
+        <StackPanel Margin="150 0 150 0">
+            <TextBlock Text="Productos" 
+                       FontSize="25"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center"/>
+            
+            <!-- Nombre del producto -->
+            <Label Content="Nombre"/>
+            <ui:TextBox Text="{Binding Path=Producto.Nombre, Mode=TwoWay}" />
+            
+            <!-- Descripción del producto -->
+            <Label Content="Descripción"/>
+            <ui:TextBox Text="{Binding Path=Producto.Descripcion, Mode=TwoWay}" />
+            
+            <!-- Precio del producto -->
+            <Label Content="Precio"/>
+            <ui:NumberBox Text="{Binding Path=Producto.Precio, Mode=TwoWay}" />
+            
+            <ui:Button Content="Agregar"
+                       Appearance="Primary"
+                       HorizontalAlignment="Center"
+                       Margin="0 15 0 0"
+                       Command="{Binding AgregarProductoCommand}"/>
+        </StackPanel>
     </Grid>
 </Page>

@@ -25,6 +25,7 @@ public partial class MainWindow : FluentWindow
         // Establece la página de inicio.
         RootNavigation.SetPageService(pageService);
         
-        //Loaded += (_, _) => RootNavigation.Navigate(typeof(ProductoView));
+        // Iniciamos la aplicación en la vista de inicio.
+        Loaded += (_, _) => RootNavigation.Navigate(typeof(InicioView));
     }
 }
