@@ -5,8 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Unison_Almacen_App.Views"
       mc:Ignorable="d"
-      Title="ProductoView" Height="600" Width="800">
+      Title="ProductoView" Height="511" Width="800">
     <Grid>
-        <TextBlock Text="Producto View" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="Producto View" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"/>
     </Grid>
 </Page>

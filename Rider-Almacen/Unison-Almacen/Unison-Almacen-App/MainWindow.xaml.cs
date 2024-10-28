@@ -1,5 +1,6 @@
 ﻿using Unison_Almacen_App.ViewModel;
 using Unison_Almacen_App.Views;
+using Wpf.Ui;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
 
@@ -10,17 +11,20 @@ namespace Unison_Almacen_App;
 /// </summary>
 public partial class MainWindow : FluentWindow
 {
-    public MainWindow(MainWindowViewModel viewModel)
+    public MainWindow(MainWindowViewModel viewModel, IPageService pageService)
     {
-        InitializeComponent();
-
         // Inicializamos el contexto de datos.
         DataContext = viewModel;
+        
+        // Inicializamos los componentes de la ventana.
+        InitializeComponent();
 
         // Inicializa el tema de la aplicación.
         ApplicationThemeManager.Apply(this);
 
         // Establece la página de inicio.
-        Loaded += (_, _) => RootNavigation.Navigate(typeof(ProductoView));
+        RootNavigation.SetPageService(pageService);
+        
+        //Loaded += (_, _) => RootNavigation.Navigate(typeof(ProductoView));
     }
 }

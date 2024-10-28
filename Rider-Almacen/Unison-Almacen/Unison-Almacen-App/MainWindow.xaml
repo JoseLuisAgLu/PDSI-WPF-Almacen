@@ -5,21 +5,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    xmlns:local="clr-namespace:Unison_Almacen_App"
+    xmlns:viewModel="clr-namespace:Unison_Almacen_App.ViewModel"
     Height="600"
     Width="800 "
+    d:DataContext="{d:DesignInstance viewModel:MainWindowViewModel}"
     mc:Ignorable="d">
     <StackPanel>
         <ui:TitleBar Title="Unison Almacen"/>
-        <ui:NavigationView x:Name="RootNavigation" 
+        <ui:NavigationView x:Name="RootNavigation"
+                           MenuItemsSource="{Binding NavigationItems}"
                            IsBackButtonVisible="Auto" 
                            PaneTitle="Vistas" 
                            IsPaneOpen="False" 
                            PaneDisplayMode="Top">
-            <ui:NavigationView.MenuItems>
-                <ui:NavigationViewItem Content="Inicio"/>
-                <ui:NavigationViewItem Content="Productos"/>
-            </ui:NavigationView.MenuItems>
         </ui:NavigationView>
     </StackPanel>
 </ui:FluentWindow>
