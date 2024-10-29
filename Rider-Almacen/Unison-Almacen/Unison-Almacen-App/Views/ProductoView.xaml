@@ -19,16 +19,16 @@
             
             <!-- Nombre del producto -->
             <Label Content="Nombre"/>
-            <ui:TextBox Text="{Binding Path=Producto.Nombre, Mode=TwoWay}" />
+            <ui:TextBox Text="{Binding Producto.Nombre, Mode=TwoWay}" />
             
             <!-- Descripción del producto -->
             <Label Content="Descripción"/>
-            <ui:TextBox Text="{Binding Path=Producto.Descripcion, Mode=TwoWay}" />
+            <ui:TextBox Text="{Binding Producto.Descripcion, Mode=TwoWay}" />
             
             <!-- Precio del producto -->
             <Label Content="Precio"/>
-            <ui:NumberBox Text="{Binding Path=Producto.Precio, Mode=TwoWay}" />
-            
+            <!--<ui:NumberBox Value="{Binding Producto.Precio, Mode=TwoWay}" />-->
+            <ui:TextBox Text="{Binding Producto.Precio, Mode=TwoWay}" />
             <ui:Button Content="Agregar"
                        Appearance="Primary"
                        HorizontalAlignment="Center"

@@ -60,12 +60,12 @@ public sealed partial class App : Application
         // Views
         services.AddTransient<InicioView>();
         services.AddTransient<ProductoView>();
-        
+
         // ViewModels.
         services.AddTransient<MainWindowViewModel>();
         services.AddTransient<InicioViewModel>();
         services.AddTransient<ProductoViewModel>();
-        
+        services.AddTransient<ProductoListView>(); // Añade esta línea si aún no está
         return services.BuildServiceProvider();
     }
 
@@ -75,5 +75,10 @@ public sealed partial class App : Application
         
         var mainWindow = Services.GetRequiredService<MainWindow>();
         mainWindow.Show();
+
+        // Aquí puedes abrir ProductosPage directamente o configurar la navegación desde MainWindow.
+        // Por ejemplo, si estás usando una navegación basada en pestañas o botones:
+        // var productosPage = Services.GetRequiredService<ProductosPage>();
+        // mainWindow.Navigate(productosPage); // Asegúrate de que MainWindow tenga un método de navegación.
     }
 }
