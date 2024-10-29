@@ -23,6 +23,11 @@ public partial class MainWindowViewModel : ObservableObject
             {
                 Content = "Producto",
                 TargetPageType = typeof(ProductoView)
+            },
+            new NavigationViewItem()
+            {
+            Content = "Ver Productos",
+            TargetPageType = typeof(ProductoListView)
             }
         ];
     }

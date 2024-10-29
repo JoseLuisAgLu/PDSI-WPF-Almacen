@@ -34,7 +34,7 @@
                    VerticalAlignment="Center"/>
         
         <TextBlock Grid.Row="3" 
-                   Text="Aguilera Luzania José Luis"
+                   Text="Edgar Rafael Romero Martin"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Bottom"/>
     </Grid>
