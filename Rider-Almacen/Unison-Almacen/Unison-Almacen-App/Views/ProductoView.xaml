@@ -10,7 +10,14 @@
       mc:Ignorable="d"
       Title="ProductoView" Height="511" Width="800">
     <Grid>
-        <StackPanel Margin="150 0 150 0">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Formulario -->
+        <StackPanel Grid.Row="0" Margin="150 0 150 0">
             <TextBlock Text="Productos" 
                        FontSize="25"
                        FontWeight="Bold"
@@ -32,8 +39,24 @@
             <ui:Button Content="Agregar"
                        Appearance="Primary"
                        HorizontalAlignment="Center"
-                       Margin="0 15 0 0"
+                       Margin="0 10 0 10"
                        Command="{Binding AgregarProductoCommand}"/>
         </StackPanel>
+        
+        <!-- DataTable -->
+        <ui:DataGrid Grid.Row="1" 
+                     Name="ProductosDataGrid"
+                     Margin="50 0 50 0" 
+                     AutoGenerateColumns="False"
+                     IsReadOnly="True"
+                     ItemsSource="{Binding Productos}">
+            
+            <ui:DataGrid.Columns>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*"/>
+                <DataGridTextColumn Header="Descripción" Binding="{Binding Descripcion}" Width="*"/>
+                <DataGridTextColumn Header="Precio" Binding="{Binding Precio}" Width="*"/>
+            </ui:DataGrid.Columns>
+            
+        </ui:DataGrid>
     </Grid>
 </Page>
