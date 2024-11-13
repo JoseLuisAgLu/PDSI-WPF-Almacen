@@ -21,12 +21,9 @@
                Source="../Resources/Logo_Unison.png" 
                Margin="0 80 0 20"/>
         
-        <TextBlock Grid.Row="1" 
+        <ui:TextBlock Grid.Row="1" 
                    Text="ALMACEN UNISON"
-                   FontSize="25"
-                   FontWeight="Bold"
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center"/>
+                   Style="{StaticResource TitleText}"/>
         
         <TextBlock Grid.Row="2" 
                    Text="Aplicación para el manejo de productos"
