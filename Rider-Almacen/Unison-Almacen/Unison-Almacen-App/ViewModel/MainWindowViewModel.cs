@@ -28,7 +28,13 @@ public partial class MainWindowViewModel : ObservableObject
             {
             Content = "Ver Productos",
             TargetPageType = typeof(ProductoListView)
-            }
+            },
+            new NavigationViewItem()
+            {
+            Content = "Hacer Notas",
+            TargetPageType = typeof(NotaInicioView)
+            },
+
         ];
     }
 }

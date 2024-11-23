@@ -14,9 +14,9 @@
         <ui:TitleBar Title="Unison Almacen"/>
         <ui:NavigationView x:Name="RootNavigation"
                            MenuItemsSource="{Binding NavigationItems}"
-                           IsBackButtonVisible="Auto" 
-                           PaneTitle="Vistas" 
-                           IsPaneOpen="False" 
+                           IsBackButtonVisible="Auto"
+                           PaneTitle="Vistas"
+                           IsPaneOpen="False"
                            PaneDisplayMode="Top">
         </ui:NavigationView>
     </StackPanel>

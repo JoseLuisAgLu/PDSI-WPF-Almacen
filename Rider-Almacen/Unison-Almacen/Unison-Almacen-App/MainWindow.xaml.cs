@@ -21,7 +21,7 @@ public partial class MainWindow : FluentWindow
 
         // Inicializa el tema de la aplicación.
         ApplicationThemeManager.Apply(this);
-
+        
         // Establece la página de inicio.
         RootNavigation.SetPageService(pageService);
         

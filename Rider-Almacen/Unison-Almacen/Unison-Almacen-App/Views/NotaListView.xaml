@@ -1,0 +1,60 @@
+﻿<Page x:Class="Unison_Almacen_App.Views.NotaListView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:local="clr-namespace:Unison_Almacen_App.Views"
+      xmlns:viewModel="clr-namespace:Unison_Almacen_App.ViewModel"
+      d:DataContext="{d:DesignInstance viewModel:NotaViewModel}"
+      mc:Ignorable="d"
+      Title="NotaListView" Height="450" Width="800">
+    <Grid>
+       <ui:DataGrid Grid.Row="1" 
+                     Name="NotasDataGrid"
+                     Margin="50 0 50 0" 
+                     AutoGenerateColumns="False"
+                     IsReadOnly="True"
+                     ItemsSource="{Binding Notas}"
+                     SelectedItem="{Binding Notas, Mode=TwoWay}">
+            
+            <ui:DataGrid.Columns>
+                <DataGridTextColumn Header="Titulo" Binding="{Binding Titulo}" Width="*"/>
+                <DataGridTextColumn Header="Contenido" Binding="{Binding Contenido}" Width="*"/>
+                   
+                <DataGridTemplateColumn Header="Acciones" Width="Auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ui:Button Command="{Binding DataContext.EliminarNotaCommand, RelativeSource={RelativeSource AncestorType={x:Type ui:DataGrid}}}" 
+                                       CommandParameter="{Binding}"
+                                       Appearance="Danger"
+                                       Foreground="White"
+                                       HorizontalAlignment="Center">
+                                <ui:Button.Content>
+                                    <TextBlock Text="&#xE74D;" 
+                                               FontFamily="Segoe MDL2 Assets" 
+                                               Foreground="White" 
+                                               FontSize="16"
+                                               VerticalAlignment="Center" 
+                                               HorizontalAlignment="Center" />
+                                </ui:Button.Content>
+                            </ui:Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+            </ui:DataGrid.Columns>
+        </ui:DataGrid>
+        <Button Grid.Row="3"
+                Content="+"
+                Width="150"
+                Height="40"
+                Background="LightBlue"
+                Foreground="Black"
+                FontSize="16"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Margin="0,20"
+                Click="AgregarNotaButton_Click"/>   
+    </Grid>
+</Page>

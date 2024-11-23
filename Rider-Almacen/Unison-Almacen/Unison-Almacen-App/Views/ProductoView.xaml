@@ -10,30 +10,72 @@
       mc:Ignorable="d"
       Title="ProductoView" Height="511" Width="800">
     <Grid>
-        <StackPanel Margin="150 0 150 0">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Formulario -->
+        <StackPanel Grid.Row="0" Margin="150 0 150 0">
             <TextBlock Text="Productos" 
-                       FontSize="25"
-                       FontWeight="Bold"
-                       HorizontalAlignment="Center" 
-                       VerticalAlignment="Center"/>
+                       Style="{StaticResource TitleText}"/>
             
             <!-- Nombre del producto -->
             <Label Content="Nombre"/>
-            <ui:TextBox Text="{Binding Producto.Nombre, Mode=TwoWay}" />
+            <ui:TextBox Text="{Binding Path=Producto.Nombre, Mode=TwoWay}" />
             
             <!-- Descripción del producto -->
             <Label Content="Descripción"/>
-            <ui:TextBox Text="{Binding Producto.Descripcion, Mode=TwoWay}" />
+            <ui:TextBox Text="{Binding Path=Producto.Descripcion, Mode=TwoWay}" />
             
             <!-- Precio del producto -->
             <Label Content="Precio"/>
-            <!--<ui:NumberBox Value="{Binding Producto.Precio, Mode=TwoWay}" />-->
-            <ui:TextBox Text="{Binding Producto.Precio, Mode=TwoWay}" />
-            <ui:Button Content="Agregar"
-                       Appearance="Primary"
-                       HorizontalAlignment="Center"
-                       Margin="0 15 0 0"
+            <ui:NumberBox Text="{Binding Path=Producto.Precio, Mode=TwoWay}" />
+            
+            <!-- Botón para agregar un producto -->
+            <ui:Button Content="{Binding TxtBotonFormulario, Mode=OneWay}"
+                       Style="{StaticResource GreenPrimaryButton}"
                        Command="{Binding AgregarProductoCommand}"/>
         </StackPanel>
+        
+        <!-- DataTable -->
+        <ui:DataGrid Grid.Row="1" 
+                     Name="ProductosDataGrid"
+                     Margin="50 0 50 0" 
+                     AutoGenerateColumns="False"
+                     IsReadOnly="True"
+                     ItemsSource="{Binding Productos}"
+                     SelectedItem="{Binding Producto, Mode=TwoWay}">
+            
+            <ui:DataGrid.Columns>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*"/>
+                <DataGridTextColumn Header="Descripción" Binding="{Binding Descripcion}" Width="*"/>
+                <DataGridTextColumn Header="Precio" Binding="{Binding Precio}" Width="*"/>
+                
+                <DataGridTemplateColumn Header="Acciones" Width="Auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ui:Button Command="{Binding DataContext.EliminarProductoCommand, RelativeSource={RelativeSource AncestorType={x:Type ui:DataGrid}}}" 
+                                       CommandParameter="{Binding}"
+                                       Appearance="Danger"
+                                       Foreground="White"
+                                       HorizontalAlignment="Center">
+                                <ui:Button.Content>
+                                    <TextBlock Text="&#xE74D;" 
+                                               FontFamily="Segoe MDL2 Assets" 
+                                               Foreground="White" 
+                                               FontSize="16"
+                                               VerticalAlignment="Center" 
+                                               HorizontalAlignment="Center" />
+                                </ui:Button.Content>
+                            </ui:Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+            </ui:DataGrid.Columns>
+            
+        </ui:DataGrid>
     </Grid>
 </Page>
