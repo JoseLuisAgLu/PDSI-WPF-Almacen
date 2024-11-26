@@ -1,5 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Windows;
+using Unison_Almacen_App.ViewModel;
+
 namespace Unison_Almacen_App.Views;
 
 public partial class NotaInicioView : Page
@@ -10,10 +12,8 @@ public partial class NotaInicioView : Page
     }
     private void AgregarNotaButton_Click(object sender, RoutedEventArgs e)
     {
-        // Crear la instancia de la página NotaView
-        var nuevaNotaView = new NotaListView();
-
-        // Navegar hacia la nueva vista
-        NavigationService.Navigate(nuevaNotaView);
+        var listViewModel = new NotaListViewModel(); // Usar datos vacíos o predeterminados
+        var listView = new NotaListView(listViewModel);
+        NavigationService.Navigate(listView);
     }
 }

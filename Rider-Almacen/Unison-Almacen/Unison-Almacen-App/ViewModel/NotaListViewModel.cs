@@ -5,48 +5,52 @@ using Unison_Almacen_Core.Modelos;
 using Unison_Almacen_Core.Contratos.Servicios;
 using Unison_Almacen_App.Servicios;
 using Unison_Almacen_App.Views;
-
-namespace Unison_Almacen_App.ViewModel;
-
-public partial class NotaListViewModel : ObservableObject
+using System.Windows.Input;
+namespace Unison_Almacen_App.ViewModel
 {
-    private readonly IS2<Nota> _notaServicio;
-
-    [ObservableProperty] private ObservableCollection<Nota> _notas;
-
-    [ObservableProperty] private Nota? _notaSeleccionada;
-
-    public NotaListViewModel(IS2<Nota> notaServicio)
+    public partial class NotaListViewModel : ObservableObject
     {
-        _notaServicio = notaServicio;
-        Notas = new ObservableCollection<Nota>(_notaServicio.Listar());
+        [ObservableProperty] private Nota _nota = new Nota();
+        [ObservableProperty] private List<Nota> _notas;
+        [ObservableProperty] private string _txtBotonFormulario;
+    
+        private const string TXT_AGREGAR = "Agregar";
+        private const string TXT_MODIFICAR = "Modificar";
+        private IS2<Nota>? _servicio;
+
+        // Constructor sin parámetros
+        public NotaListViewModel()
+        {
+            _notas = new List<Nota>
+            {
+                new Nota { Id = Guid.NewGuid(), Titulo = "Perdi mi gato", Contenido = "Na mentira, es que no sabia que poner", Color="Blue" },
+                new Nota { Id = Guid.NewGuid(), Titulo = "Spoiler del Elden ring", Contenido = "Radagorn es Marika", Color="Red" }
+            };
+            _txtBotonFormulario = TXT_AGREGAR;
+        }
+
+        // Constructor con servicio
+        public NotaListViewModel(IS2<Nota> servicio)
+        {
+            _servicio = servicio;
+            _notas = _servicio.Listar();
+            _txtBotonFormulario = TXT_AGREGAR;
+        }
+
+        public ICommand EliminarNotaCommand { get; }
+
+        private void EliminarNota(Nota? nota)
+        {
+            if (nota == null) return;
+            _servicio?.Eliminar(nota);
+            Notas = _servicio?.Listar();
+        }
+
+        partial void OnNotaChanged(Nota? oldValue, Nota newValue)
+        {
+            TxtBotonFormulario = newValue.Id != Guid.Empty ? TXT_MODIFICAR : TXT_AGREGAR;
+            Nota = newValue;
+        }
     }
 
-    [RelayCommand]
-    private void AgregarNota()
-    {
-        var nuevaNota = new Nota { Id = Guid.NewGuid(), Titulo = "Nueva Nota", Contenido = "" };
-        _notaServicio.Agregar(nuevaNota);
-        Notas.Add(nuevaNota);
-    }
-
-    [RelayCommand]
-    private void EliminarNota(Nota? nota)
-    {
-        if (nota == null) return;
-
-        _notaServicio.Eliminar(nota);
-        Notas.Remove(nota);
-    }
-
-    [RelayCommand]
-    private void SeleccionarNota(Nota nota)
-    {
-        if (nota == null) return;
-
-        var contentViewModel = new NotaContentViewModel(nota);
-
-        // Navegar a la vista asociada a NotaContentViewModel
-        NavigationService.Navigate<NotaContentViewModel>();
-    }
 }

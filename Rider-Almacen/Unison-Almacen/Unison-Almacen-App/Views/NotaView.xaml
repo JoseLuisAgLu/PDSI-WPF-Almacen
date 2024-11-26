@@ -42,6 +42,12 @@
                         TextWrapping="Wrap" 
                         VerticalScrollBarVisibility="Auto" 
                         Margin="0,0,0,10"/>
+            
+            <Label Content="Color" Margin="0,5,0,0"/>
+            <ComboBox ItemsSource="{Binding Colores}" 
+                      SelectedItem="{Binding Nota.Color, Mode=TwoWay}" 
+                      Height="30" 
+                      Margin="0,0,0,10"/>
         </StackPanel>
 
         <!-- Botones -->
@@ -51,7 +57,6 @@
                     Margin="0,20,0,0">
             <!-- Botón Agregar -->
             <ui:Button Content="{Binding TxtBotonFormulario, Mode=OneWay}"
-                       Style="{StaticResource GreenPrimaryButton}"
                        Command="{Binding AgregarNotaCommand}"
                        Width="150" 
                        Height="40" 
@@ -65,7 +70,7 @@
                     Foreground="Black"
                     FontSize="16"
                     Margin="10"
-                    Click="AgregarNotaButton_Click"/>
+                    Click="CancelarNotaButton_Click"/>
         </StackPanel>
     </Grid>
 </Page>
