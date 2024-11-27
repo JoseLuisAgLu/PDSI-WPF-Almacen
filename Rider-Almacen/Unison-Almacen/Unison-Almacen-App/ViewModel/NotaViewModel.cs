@@ -12,7 +12,7 @@ namespace Unison_Almacen_App.ViewModel
     {
         [ObservableProperty] private Nota _nota = new Nota();
         [ObservableProperty] private List<Nota> _notas;
-        [ObservableProperty] private List<string> _colores = new List<string> { "Rojo", "Verde", "Azul" };
+        [ObservableProperty] private List<string> _colores = new List<string> { "Red", "Green", "Blue" };
        
         [ObservableProperty] private string _txtBotonFormulario;
         private const string TXT_AGREGAR = "Agregar";
