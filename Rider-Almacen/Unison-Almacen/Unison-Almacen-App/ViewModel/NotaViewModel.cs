@@ -12,7 +12,8 @@ namespace Unison_Almacen_App.ViewModel
     {
         [ObservableProperty] private Nota _nota = new Nota();
         [ObservableProperty] private List<Nota> _notas;
-
+        [ObservableProperty] private List<string> _colores = new List<string> { "Rojo", "Verde", "Azul" };
+       
         [ObservableProperty] private string _txtBotonFormulario;
         private const string TXT_AGREGAR = "Agregar";
         private const string TXT_MODIFICAR = "Modificar";
@@ -26,35 +27,31 @@ namespace Unison_Almacen_App.ViewModel
             _notas = new List<Nota>();
             _nota.Color = "Rojo";
             _txtBotonFormulario = TXT_AGREGAR;
-
-            // Inicializar comandos
-            AgregarNotaCommand = new RelayCommand(AgregarNota);
          
         }
 
         // Constructor con servicio
         public NotaViewModel(IS2<Nota> servicio) : this()
-        {
+        {  
+            AgregarNotaCommand = new RelayCommand(AgregarNota);
             _servicio = servicio;
             // Cargar datos del servicio
             _notas = _servicio.Listar();
+          
+            _txtBotonFormulario = TXT_AGREGAR;
         }
 
         public ICommand AgregarNotaCommand { get; }
 
         private void AgregarNota()
         {
-            try
-            {
+           
                 var n = Nota;
-                if (string.IsNullOrWhiteSpace(n.Titulo) || string.IsNullOrWhiteSpace(n.Contenido))
-                {
-                    MessageBox.Show("El título y el contenido son obligatorios.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
+                if (string.IsNullOrWhiteSpace(n.Titulo) || string.IsNullOrWhiteSpace(n.Contenido) || string.IsNullOrWhiteSpace(n.Color))return;
+                
 
                 // Comprobar si la nota existe.
-                var notaExistente = _servicio?.ObtenerPorId(n.Id) ?? new Nota();
+                var notaExistente = _servicio?.ObtenerPorId(n.Id);
 
                 // Si la nota no existe, se agrega.
                 if (notaExistente.Id == Guid.Empty)
@@ -75,12 +72,7 @@ namespace Unison_Almacen_App.ViewModel
 
                 // Actualizar la tabla.
                 Nota = new Nota { Color = "Rojo" };
-                Notas = _servicio?.Listar() ?? new List<Nota>();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al agregar la nota: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+                Notas = _servicio.Listar();
         }
 
         

@@ -8,13 +8,10 @@ namespace Unison_Almacen_App.Views;
 
 public partial class NotaView : Page
 {
-    public NotaView()
+    public NotaView(NotaViewModel viewModel)
     {
         InitializeComponent();
-        // Inicializar el servicio y el ViewModel
-        var repositorio = new NotaRepositorio();
-        var servicio = new NotaServicio(repositorio);
-        var viewModel = new NotaViewModel(servicio);
+   
         DataContext = viewModel;
     }
     private void CancelarNotaButton_Click(object sender, RoutedEventArgs e)

@@ -64,13 +64,16 @@ public sealed partial class App : Application
         services.AddTransient<InicioView>();
         services.AddTransient<ProductoView>();
         services.AddTransient<NotaInicioView>();
+        services.AddTransient<NotaListView>();
+        services.AddTransient<NotaView>();
         // ViewModels.
         services.AddTransient<MainWindowViewModel>();
         services.AddTransient<InicioViewModel>();
         services.AddTransient<ProductoViewModel>();
         services.AddTransient<ProductoListView>(); 
         services.AddTransient<NotaInicioViewModel>();
-        
+        services.AddTransient<NotaViewModel>();
+        services.AddTransient<NotaListViewModel>();
         
         return services.BuildServiceProvider();
     }

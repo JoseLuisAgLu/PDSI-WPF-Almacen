@@ -14,8 +14,8 @@ public partial class NotaListView : Page
     }
     private void AgregarNotaButton_Click(object sender, RoutedEventArgs e)
     {
-        var viewModel = new NotaViewModel(); // Sin servicio
-        var nuevaNotaView = new NotaView();
-        NavigationService.Navigate(nuevaNotaView);
+        var listViewModel = new NotaViewModel(); // Usar datos vacíos o predeterminados
+        var listView = new NotaView(listViewModel);
+        NavigationService.Navigate(listView);
     }
 }
