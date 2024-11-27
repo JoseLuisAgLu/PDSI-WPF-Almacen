@@ -1,48 +1,43 @@
 ﻿using Unison_Almacen_Core.Modelos;
 using Unison_Almacen_Core.Contratos.Repositorios;
 using Unison_Almacen_Core.BaseDeDatos;
+using System.Collections.Generic;
+using System.Linq;
 namespace Unison_Almacen_Core.Repositorios
 {
-    public class NotaRepositorio : IR2<Nota>
+    public class NotaRepositorio
     {
-        public void Agregar(Nota notaNueva)
-        {
-            using var bd = new NotaBD();
-        
-            bd.Notas.Add(notaNueva);
-        
-            bd.SaveChanges();
-        }
-        public List<Nota> Listar()
-        {
-            using var bd = new NotaBD();
+        private readonly List<Nota> notas = new();
 
-            return bd.Notas.ToList();
-        }
-        public Nota ObtenerPorId(Guid id)
+        public List<Nota> ListarNotas()
         {
-            using var bd = new NotaBD();
-        
-            var resultado = bd.Notas.Find(id);
-         
-            return resultado ?? new Nota();
+            return notas;
         }
-        public void Modificar(Nota notaModificada)
+
+        public void AgregarNota(Nota nueva)
         {
-            using var bd = new NotaBD();
-        
-            bd.Notas.Update(notaModificada);
-        
-            bd.SaveChanges();
+            nueva.Id = Guid.NewGuid(); // Generar un identificador único
+            notas.Add(nueva);
         }
-        
-        public void Eliminar(Nota notaAEliminar)
+
+
+        public void ActualizarNota(Nota modificada)
         {
-            using var bd = new NotaBD();
-        
-            bd.Notas.Remove(notaAEliminar);
-        
-            bd.SaveChanges();
+            var nota = notas.FirstOrDefault(n => n.Id == modificada.Id);
+            if (nota != null)
+            {
+                nota.Titulo = modificada.Titulo;
+                nota.Contenido = modificada.Contenido;
+            }
+        }
+
+        public void EliminarNota(Guid id)
+        {
+            var nota = notas.FirstOrDefault(n => n.Id == id);
+            if (nota != null)
+            {
+                notas.Remove(nota);
+            }
         }
     }
 }

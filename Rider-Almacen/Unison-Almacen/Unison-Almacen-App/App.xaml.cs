@@ -55,7 +55,7 @@ public sealed partial class App : Application
         services.AddTransient<IRepositorio<Producto>, ProductoRepositorio>();
         
         services.AddSingleton<IPageService, PageService>();
-        services.AddTransient<IR2<Nota>, NotaRepositorio>();
+        services.AddTransient<NotaRepositorio>();
         services.AddTransient<IS2<Nota>, NotaServicio>();
         // MainWindow.
         services.AddSingleton<MainWindow>();
@@ -64,16 +64,12 @@ public sealed partial class App : Application
         services.AddTransient<InicioView>();
         services.AddTransient<ProductoView>();
         services.AddTransient<NotaInicioView>();
-        services.AddTransient<NotaListView>();
-        services.AddTransient<NotaView>();
         // ViewModels.
         services.AddTransient<MainWindowViewModel>();
         services.AddTransient<InicioViewModel>();
         services.AddTransient<ProductoViewModel>();
         services.AddTransient<ProductoListView>(); 
         services.AddTransient<NotaInicioViewModel>();
-        services.AddTransient<NotaViewModel>();
-        services.AddTransient<NotaListViewModel>();
         
         return services.BuildServiceProvider();
     }

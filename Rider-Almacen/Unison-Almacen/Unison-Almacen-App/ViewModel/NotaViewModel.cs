@@ -1,86 +1,71 @@
-﻿using System.Windows;
-using System.Windows.Input;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.EntityFrameworkCore;
-using Unison_Almacen_Core.Contratos.Servicios;
+using System;
+using System.Windows;
 using Unison_Almacen_Core.Modelos;
 
-namespace Unison_Almacen_App.ViewModel
+namespace UnisonAlmacen.App.ViewModels
 {
-    public partial class NotaViewModel : ObservableObject
+    public class NotaViewModel : ObservableObject
     {
-        [ObservableProperty] private Nota _nota = new Nota();
-        [ObservableProperty] private List<Nota> _notas;
-        [ObservableProperty] private List<string> _colores = new List<string> { "Red", "Green", "Blue" };
-       
-        [ObservableProperty] private string _txtBotonFormulario;
-        private const string TXT_AGREGAR = "Agregar";
-        private const string TXT_MODIFICAR = "Modificar";
+        private string _titulo;
+        private string _contenido;
 
-        private IS2<Nota>? _servicio;
+        public string Titulo
+        {
+            get => _titulo;
+            set => SetProperty(ref _titulo, value);
+        }
 
-        // Constructor sin parámetros
+        public string Contenido
+        {
+            get => _contenido;
+            set => SetProperty(ref _contenido, value);
+        }
+
+        public IRelayCommand GuardarNotaCommand { get; }
+
         public NotaViewModel()
         {
-            // Inicializar con datos vacíos
-            _notas = new List<Nota>();
-            _nota.Color = "Rojo";
-            _txtBotonFormulario = TXT_AGREGAR;
-         
+            GuardarNotaCommand = new RelayCommand(GuardarNota);
         }
 
-        // Constructor con servicio
-        public NotaViewModel(IS2<Nota> servicio) : this()
-        {  
-            AgregarNotaCommand = new RelayCommand(AgregarNota);
-            _servicio = servicio;
-            // Cargar datos del servicio
-            _notas = _servicio.Listar();
-          
-            _txtBotonFormulario = TXT_AGREGAR;
-        }
-
-        public ICommand AgregarNotaCommand { get; }
-
-        private void AgregarNota()
+        private void GuardarNota()
         {
-           
-                var n = Nota;
-                if (string.IsNullOrWhiteSpace(n.Titulo) || string.IsNullOrWhiteSpace(n.Contenido) || string.IsNullOrWhiteSpace(n.Color))return;
-                
+            // Validación básica de los campos
+            if (string.IsNullOrWhiteSpace(Titulo) || string.IsNullOrWhiteSpace(Contenido))
+            {
+                System.Windows.MessageBox.Show("El título y contenido no pueden estar vacíos.", 
+                    "Error", 
+                    MessageBoxButton.OK, 
+                    MessageBoxImage.Error);
+                return;
+            }
 
-                // Comprobar si la nota existe.
-                var notaExistente = _servicio?.ObtenerPorId(n.Id);
+            // Crear y guardar la nueva nota
+            var nuevaNota = new Nota
+            {
+                Id = Guid.NewGuid(),
+                Titulo = Titulo,
+                Contenido = Contenido,
+                FechaCreacion = DateTime.Now
+            };
 
-                // Si la nota no existe, se agrega.
-                if (notaExistente.Id == Guid.Empty)
-                {
-                    _servicio?.Agregar(n);
-                }
-                // Si la nota existe, se modifica.
-                else
-                {
-                    _servicio?.Modificar(n);
-                }
+            // Aquí deberías integrar el repositorio para guardar la nota
+            // Por ejemplo:
+            // _notaRepositorio.AgregarNota(nuevaNota);
 
-                // Borrar los datos del formulario.
-                Nota.Id = Guid.Empty;
-                Nota.Titulo = string.Empty;
-                Nota.Contenido = string.Empty;
-                Nota.Color = string.Empty;
+            // Mostrar mensaje de éxito
+            System.Windows.MessageBox.Show("Nota guardada con éxito.", 
+                "Éxito", 
+                MessageBoxButton.OK, 
+                MessageBoxImage.Information);
 
-                // Actualizar la tabla.
-                Nota = new Nota { Color = "Rojo" };
-                Notas = _servicio.Listar();
-        }
-
-        
-
-        partial void OnNotaChanged(Nota? oldValue, Nota newValue)
-        {
-            TxtBotonFormulario = newValue.Id != Guid.Empty ? TXT_MODIFICAR : TXT_AGREGAR;
-            Nota = newValue;
+            // Limpia los campos (opcional)
+            Titulo = string.Empty;
+            Contenido = string.Empty;
         }
     }
 }
+
+

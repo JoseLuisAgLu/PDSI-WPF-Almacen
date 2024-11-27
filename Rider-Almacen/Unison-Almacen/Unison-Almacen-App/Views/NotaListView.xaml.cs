@@ -1,21 +1,14 @@
-﻿using System.Windows.Controls;
-using System.Windows;
-using Unison_Almacen_App.ViewModel;
+﻿using System.Windows;
+using UnisonAlmacen.App.ViewModels;
 
-namespace Unison_Almacen_App.Views;
-
-public partial class NotaListView : Page
+namespace UnisonAlmacen.App.Views
 {
-    public NotaListView(NotaListViewModel viewModel)
+    public partial class NotaListView : Window
     {
-        InitializeComponent();
-        // Inicializar el DataContext.
-        DataContext = viewModel;
-    }
-    private void AgregarNotaButton_Click(object sender, RoutedEventArgs e)
-    {
-        var listViewModel = new NotaViewModel(); // Usar datos vacíos o predeterminados
-        var listView = new NotaView(listViewModel);
-        NavigationService.Navigate(listView);
+        public NotaListView()
+        {
+            InitializeComponent();
+            DataContext = new NotaListViewModel();
+        }
     }
 }

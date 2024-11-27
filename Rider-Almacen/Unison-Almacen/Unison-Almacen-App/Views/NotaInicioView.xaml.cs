@@ -1,19 +1,21 @@
 ﻿using System.Windows.Controls;
 using System.Windows;
 using Unison_Almacen_App.ViewModel;
+using UnisonAlmacen.App.Views;
 
 namespace Unison_Almacen_App.Views;
 
-public partial class NotaInicioView : Page
+public partial class NotaInicioView : Window
 {
     public NotaInicioView()
     {
         InitializeComponent();
     }
-    private void AgregarNotaButton_Click(object sender, RoutedEventArgs e)
+    private void OnIrALaListaDeNotasClick(object sender, RoutedEventArgs e)
     {
-        var listViewModel = new NotaListViewModel(); // Usar datos vacíos o predeterminados
-        var listView = new NotaListView(listViewModel);
-        NavigationService.Navigate(listView);
+        // Navegar a la lista de notas
+        var notaListView = new NotaListView();
+        notaListView.Show();
+        this.Close(); // Cerrar la ventana actual
     }
 }

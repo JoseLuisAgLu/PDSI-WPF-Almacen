@@ -1,76 +1,25 @@
-﻿<Page x:Class="Unison_Almacen_App.Views.NotaView"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-      xmlns:local="clr-namespace:Unison_Almacen_App.Views"
-      xmlns:viewModel="clr-namespace:Unison_Almacen_App.ViewModel"
-      d:DataContext="{d:DesignInstance viewModel:NotaViewModel}"
-      mc:Ignorable="d"
-      Title="NotaView" Height="450" Width="800">
-<Grid Margin="20">
-        <!-- Definición de filas y columnas -->
+﻿<Window x:Class="UnisonAlmacen.App.Views.NotaView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Nueva Nota" Height="400" Width="600">
+    <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/> <!-- Título -->
-            <RowDefinition Height="*"/>    <!-- Controles del formulario -->
-            <RowDefinition Height="Auto"/> <!-- Botones -->
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
 
-        <!-- Título -->
-        <TextBlock Grid.Row="0" 
-                   Text="Notas" 
-                   Style="{StaticResource TitleText}" 
-                   HorizontalAlignment="Center" 
-                   Margin="0,20,0,10"/>
-
-        <!-- Formulario -->
-        <StackPanel Grid.Row="1" Margin="0,10">
-            <!-- Campo Título -->
-            <Label Content="Titulo" Margin="0,5,0,0"/>
-            <ui:TextBox Text="{Binding Path=Nota.Titulo, Mode=TwoWay}" 
-                        Height="30" 
-                        Margin="0,0,0,10"/>
-
-            <!-- Campo Contenido -->
-            <Label Content="Contenido" Margin="0,5,0,0"/>
-            <ui:TextBox Text="{Binding Path=Nota.Contenido, Mode=TwoWay}" 
-                        Height="100" 
-                        TextWrapping="Wrap" 
-                        VerticalScrollBarVisibility="Auto" 
-                        Margin="0,0,0,10"/>
-            
-            <Label Content="Color" Margin="0,5,0,0"/>
-            <ComboBox ItemsSource="{Binding Colores}" 
-                      SelectedItem="{Binding Nota.Color, Mode=TwoWay}" 
-                      Height="30" 
-                      Margin="0,0,0,10"/>
+        <StackPanel Grid.Row="0" Margin="0 0 0 10">
+            <TextBlock Text="Título:" FontWeight="Bold" />
+            <TextBox Text="{Binding Titulo}" />
         </StackPanel>
 
-        <!-- Botones -->
-        <StackPanel Grid.Row="2" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    Margin="0,20,0,0">
-            <!-- Botón Agregar -->
-            <ui:Button Content="{Binding TxtBotonFormulario, Mode=OneWay}"
-                       Command="{Binding AgregarNotaCommand}"
-                       Width="150" 
-                       Height="40" 
-                       Margin="10"/>
-
-            <!-- Botón Cancelar -->
-            <Button Content="Cancelar"
-                    Width="150"
-                    Height="40"
-                    Background="LightBlue"
-                    Foreground="Black"
-                    FontSize="16"
-                    Margin="10"
-                    Click="CancelarNotaButton_Click"/>
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Contenido:" FontWeight="Bold" />
+            <TextBox Text="{Binding Contenido}" AcceptsReturn="True" Height="200" />
         </StackPanel>
+
+        <Button Content="Guardar Nota" Grid.Row="2" Height="40" 
+                HorizontalAlignment="Center" Command="{Binding GuardarNotaCommand}" />
     </Grid>
-</Page>
+</Window>
