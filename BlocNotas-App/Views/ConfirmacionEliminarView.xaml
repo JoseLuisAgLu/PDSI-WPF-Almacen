@@ -1,0 +1,47 @@
+﻿<Window x:Class="BlocNotas.Views.ConfirmacionEliminarView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Confirmar Eliminación" Height="200" Width="400"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <!-- Estilo para los botones -->
+        <Style x:Key="ModernButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#007ACC"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="10" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <!-- Texto de confirmación -->
+        <TextBlock Text="¿Estás seguro de que deseas eliminar esta nota?" 
+                   HorizontalAlignment="Center" VerticalAlignment="Top" 
+                   TextWrapping="Wrap" FontSize="16" Margin="20,30,20,10"
+                   TextAlignment="Center"/>
+
+        <!-- Botones de Confirmar y Cancelar -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">
+            <Button Name="ConfirmarButton" Content="Confirmar" 
+                    Style="{StaticResource ModernButtonStyle}" 
+                    Background="#28A745" Click="ConfirmarButton_Click"/>
+            <Button Name="CancelarButton" Content="Cancelar" 
+                    Style="{StaticResource ModernButtonStyle}" 
+                    Background="#E74C3C" Click="CancelarButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

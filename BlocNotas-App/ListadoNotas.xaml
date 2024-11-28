@@ -1,0 +1,114 @@
+﻿<Window x:Class="BlocNotas.ListadoNotas"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.expression.blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BlocNotas"
+        mc:Ignorable="d"
+        Title="Listado de Notas" Height="500" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <local:ColorConverter x:Key="ColorConverter"/>
+        <!-- Estilo para los contenedores de notas -->
+        <Style x:Key="NoteContainerStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Height" Value="70"/> <!-- Altura uniforme para las notas -->
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="8" ShadowDepth="2" Color="#999"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Estilo para los botones generales -->
+        <Style x:Key="ModernButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#007ACC"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Width" Value="135"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="5" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Estilo para los botones pequeños -->
+        <Style x:Key="SmallButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#E74C3C"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <!-- Título en la parte superior -->
+        <TextBlock Text="Lista de Notas" FontSize="24" FontWeight="Bold" Foreground="#333" HorizontalAlignment="Center" Margin="10"/>
+
+        <!-- Listado de notas -->
+        <ListBox Name="NotasListBox" Margin="10,50,10,70" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Style="{StaticResource NoteContainerStyle}" Background="{Binding Color, Converter={StaticResource ColorConverter}}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Título de la nota -->
+                            <TextBlock Text="{Binding Titulo}" FontSize="16" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" Margin="10,0,0,0" TextTrimming="CharacterEllipsis"/>
+
+                            <!-- Botones de acciones (Eliminar/Modificar) -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0">
+                                <Button Content="✏️" ToolTip="Editar Nota" Style="{StaticResource SmallButtonStyle}" Background="#F1C40F" Click="ModificarNota_Click"/>
+                                <Button Content="🗑" ToolTip="Eliminar Nota" Style="{StaticResource SmallButtonStyle}" Click="EliminarNota_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!-- Botones en la parte inferior -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">
+            <Button Content="Agregar Nota" Style="{StaticResource ModernButtonStyle}" Click="AgregarNota_Click"/>
+            <Button Content="Importar Notas" Style="{StaticResource ModernButtonStyle}" Click="ImportarNotas_Click"/>
+            <Button Content="Exportar Notas" Style="{StaticResource ModernButtonStyle}" Click="ExportarNotas_Click"/>
+            <Button Content="Actualizar" Style="{StaticResource ModernButtonStyle}" Click="ActualizarPagina_Click"/>
+        </StackPanel>
+
+        <!-- Botón para regresar -->
+        <Button Name="RegresarButton" Click="RegresarAlInicio_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"
+                Background="Transparent" BorderBrush="Transparent">
+            <TextBlock FontSize="20" Text="&#8592;" Foreground="#007ACC" FontWeight="Bold"/>
+        </Button>
+    </Grid>
+</Window>
+

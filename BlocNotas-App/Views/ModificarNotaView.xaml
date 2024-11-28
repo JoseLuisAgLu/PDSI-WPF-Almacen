@@ -1,0 +1,72 @@
+﻿<Window x:Class="BlocNotas.Views.ModificarNotaView"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Modificar Nota" Height="600" Width="600"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <!-- Estilo para los botones -->
+        <Style x:Key="ModernButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#007ACC"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="10" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <!-- Definir filas en el Grid para controlar el tamaño de cada sección -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- Título -->
+            <RowDefinition Height="Auto"/> <!-- Título de la nota -->
+            <RowDefinition Height="*"/> <!-- Contenido de la nota -->
+            <RowDefinition Height="Auto"/> <!-- Color -->
+            <RowDefinition Height="Auto"/> <!-- Botones -->
+        </Grid.RowDefinitions>
+
+        <!-- Título de la ventana -->
+        <TextBlock Text="Informacion de la Nota" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#333" Margin="0,0,0,20" Grid.Row="0"/>
+
+        <!-- Título -->
+        <StackPanel Orientation="Vertical" Margin="0,0,0,20" Grid.Row="1">
+            <TextBlock Text="Título:" FontSize="16" FontWeight="Bold" Foreground="#555" Margin="0,5"/>
+            <TextBox Text="{Binding Titulo}" FontSize="14" Padding="5" BorderBrush="#CCC" BorderThickness="1" Margin="0,5"/>
+        </StackPanel>
+
+        <!-- Contenido -->
+        <StackPanel Orientation="Vertical" Margin="0,0,0,20" Grid.Row="2">
+            <TextBlock Text="Contenido:" FontSize="16" FontWeight="Bold" Foreground="#555" Margin="0,5"/>
+            <TextBox Text="{Binding Contenido}" FontSize="14" Padding="5" BorderBrush="#CCC" BorderThickness="1" Margin="0,5" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Height="200"/>
+        </StackPanel>
+
+        <!-- Color -->
+        <StackPanel Orientation="Vertical" Margin="0,0,0,20" Grid.Row="3">
+            <TextBlock Text="Color:" FontSize="16" FontWeight="Bold" Foreground="#555" Margin="0,5"/>
+            <ComboBox x:Name="ColorComboBox" FontSize="14" Padding="5" BorderBrush="#CCC" BorderThickness="1" Width="200" Margin="0,5">
+                <ComboBoxItem Content="Rojo" />
+                <ComboBoxItem Content="Azul" />
+                <ComboBoxItem Content="Amarillo" />
+            </ComboBox>
+        </StackPanel>
+
+        <!-- Botones de acción -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="4" Margin="0,20,0,0">
+            <Button Content="Guardar" Style="{StaticResource ModernButtonStyle}" Command="{Binding GuardarCambiosCommand}"/>
+            <Button Content="Cancelar" Style="{StaticResource ModernButtonStyle}" Command="{Binding CancelarCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+        </StackPanel>
+    </Grid>
+</Window>
